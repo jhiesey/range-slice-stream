@@ -1,13 +1,13 @@
-# stream-slicer
+# range-slice-stream
 
 Extract a bunch of ranges from a stream to construct a new stream
 
 ## Usage
 
 ``` js
-var StreamSlicer = require('stream-slicer')
+var RangeSliceStream = require('range-slice-stream')
 
-var slicer = new StreamSlicer()
+var slicer = new RangeSliceStream()
 slicer.end('abcdefghijklmnop')
 
 var out = slicer.slice([
@@ -28,7 +28,7 @@ out.pipe(process.stdout)
 
 ## API
 
-#### `var slicer = new StreamSlicer(offset)`
+#### `var slicer = new RangeSliceStream(offset)`
 
 Create a new slicer, which is a writable stream.
 

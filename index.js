@@ -10,11 +10,13 @@ emits 'stalled' once everything is written
 var inherits = require('inherits')
 var stream = require('stream')
 
-module.exports = StreamSlicer
+module.exports = RangeSliceStream
 
-function StreamSlicer (offset) {
+inherits(RangeSliceStream, stream.Writable)
+
+function RangeSliceStream (offset) {
 	var self = this
-	if (!(self instanceof StreamSlicer)) return new StreamSlicer(offset)
+	if (!(self instanceof RangeSliceStream)) return new RangeSliceStream(offset)
 	stream.Writable.call(self)
 
 	self.destroyed = false
@@ -25,9 +27,7 @@ function StreamSlicer (offset) {
 	self._out = null
 }
 
-inherits(StreamSlicer, stream.Writable)
-
-StreamSlicer.prototype._write = function (chunk, encoding, cb) {
+RangeSliceStream.prototype._write = function (chunk, encoding, cb) {
 	var self = this
 
 	var drained = true
@@ -90,7 +90,7 @@ StreamSlicer.prototype._write = function (chunk, encoding, cb) {
 	}
 }
 
-StreamSlicer.prototype.slice = function (ranges) {
+RangeSliceStream.prototype.slice = function (ranges) {
 	var self = this
 
 	if (self.destroyed) return null
@@ -116,7 +116,7 @@ StreamSlicer.prototype.slice = function (ranges) {
 	return str
 }
 
-StreamSlicer.prototype.destroy = function (err) {
+RangeSliceStream.prototype.destroy = function (err) {
 	var self = this
 	if (self.destroyed) return
 	self.destroyed = true
