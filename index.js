@@ -14,7 +14,7 @@ module.exports = StreamSlicer
 
 function StreamSlicer (offset) {
 	var self = this
-	if (!(self instanceof StreamSlicer)) return new StreamSlicer()
+	if (!(self instanceof StreamSlicer)) return new StreamSlicer(offset)
 	stream.Writable.call(self)
 
 	self.destroyed = false
@@ -37,7 +37,7 @@ StreamSlicer.prototype._write = function (chunk, encoding, cb) {
 			return
 		}
 
-		// Block and wait for more queue entries
+		// Wait for more queue entries
 		if (self._queue.length === 0) {
 			self._buffer = chunk
 			self._cb = cb
