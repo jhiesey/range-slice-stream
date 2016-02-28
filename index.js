@@ -8,7 +8,7 @@ emits 'stalled' once everything is written
 
 */
 var inherits = require('inherits')
-var stream = require('stream')
+var stream = require('readable-stream')
 
 module.exports = RangeSliceStream
 

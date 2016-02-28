@@ -19,6 +19,7 @@
   "author": "John Hiesey",
   "license": "MIT",
   "dependencies": {
-    "inherits": "^2.0.1"
+    "inherits": "^2.0.1",
+    "readable-stream": "^2.0.5"
   }
 }
