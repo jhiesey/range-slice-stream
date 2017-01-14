@@ -28,13 +28,15 @@ out.pipe(process.stdout)
 
 ## API
 
-#### `var slicer = new RangeSliceStream(offset)`
+#### `var slicer = new RangeSliceStream([offset[, opts]])`
 
 Create a new slicer, which is a writable stream.
 
 If an `offset` is provided, it is subtracted from all range offsets. This
 makes it more intuitive to use if the incoming data stream itself starts
 at an offset into an underlying resource like a file.
+
+`opts` is passed to the underlying writable stream constructor.
 
 #### `var slice = slicer.slice([{start: <s1>, end: <e1>}, {start: <s2>, end: <e2>},...])`
 

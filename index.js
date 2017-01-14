@@ -14,10 +14,10 @@ module.exports = RangeSliceStream
 
 inherits(RangeSliceStream, stream.Writable)
 
-function RangeSliceStream (offset) {
+function RangeSliceStream (offset, opts) {
 	var self = this
 	if (!(self instanceof RangeSliceStream)) return new RangeSliceStream(offset)
-	stream.Writable.call(self)
+	stream.Writable.call(self, opts)
 
 	self.destroyed = false
 	self._queue = []
