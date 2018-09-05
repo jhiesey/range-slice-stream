@@ -5,20 +5,14 @@ Extract a bunch of ranges from a stream to construct a new stream
 ## Usage
 
 ``` js
-var RangeSliceStream = require('range-slice-stream')
+const RangeSliceStream = require('range-slice-stream')
 
-var slicer = new RangeSliceStream()
+const slicer = new RangeSliceStream()
 slicer.end('abcdefghijklmnop')
 
-var out = slicer.slice([
-{
-	start: 1,
-	end: 3
-},
-{
-	start: 6,
-	end: 9
-}
+const out = slicer.slice([
+  { start: 1, end: 3 },
+  { start: 6, end: 9 }
 ])
 
 out.pipe(process.stdout)
