@@ -16,9 +16,11 @@
     "substream",
     "range"
   ],
+  "types": "index.d.ts",
   "author": "John Hiesey",
   "license": "MIT",
   "dependencies": {
-    "readable-stream": "^3.0.2"
+    "@types/node": "^20.10.4",
+    "readable-stream": "^4.4.2"
   }
 }
