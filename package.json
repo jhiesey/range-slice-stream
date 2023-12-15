@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jhiesey/range-slice-stream.git"
+    "url": "git+https://github.com/jhiesey/range-slice-stream.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
