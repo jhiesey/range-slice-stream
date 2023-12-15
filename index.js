@@ -1,23 +1,16 @@
-/*
-Instance of writable stream.
-
-call .get(length) or .discard(length) to get a stream (relative to the last end)
-
-emits 'stalled' once everything is written
-
-*/
 const { Writable, PassThrough } = require('readable-stream')
 
 class RangeSliceStream extends Writable {
   constructor (offset, opts = {}) {
     super(opts)
 
-    this.destroyed = false
+    // Indicates whether all currently requested slices are satisfied
+    this.satisfied = true
+
     this._queue = []
     this._position = offset || 0
     this._cb = null
     this._buffer = null
-    this._out = null
   }
 
   _write (chunk, encoding, cb) {
@@ -30,6 +23,8 @@ class RangeSliceStream extends Writable {
 
       // Wait for more queue entries
       if (this._queue.length === 0) {
+        this.satisfied = true
+        this.emit('satisfied')
         this._buffer = chunk
         this._cb = cb
         return
@@ -84,6 +79,7 @@ class RangeSliceStream extends Writable {
   slice (ranges) {
     if (this.destroyed) return null
 
+    this.satisfied = false
     if (!Array.isArray(ranges)) ranges = [ranges]
 
     const str = new PassThrough()
@@ -102,13 +98,6 @@ class RangeSliceStream extends Writable {
     }
 
     return str
-  }
-
-  destroy (err) {
-    if (this.destroyed) return
-    this.destroyed = true
-
-    if (err) this.emit('error', err)
   }
 }
 

@@ -46,6 +46,12 @@ Data between ranges is discarded. Once all ranges specified by `slice()` calls
 are satisfied, backpressure will be applied to the incoming stream until the
 next desired range is specified by calling `slice()` again.
 
+#### `slicer.satisfied`
+
+Boolean that is true when all `slice()` calls have been satisfied and
+backpressure is applied. In addition, the `satisfied` event is emitted
+when `slicer.satisfied` becomes true.
+
 ## License
 
 MIT
